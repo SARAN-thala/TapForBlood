@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150509065318) do
+ActiveRecord::Schema.define(version: 20150509193356) do
 
   create_table "blood_requests", force: :cascade do |t|
     t.string   "blood_group"
@@ -44,8 +44,9 @@ ActiveRecord::Schema.define(version: 20150509065318) do
     t.string   "latitude"
     t.string   "longitude"
     t.date     "last_donated"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "registration_id"
   end
 
 end

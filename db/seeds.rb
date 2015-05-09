@@ -15,11 +15,12 @@ User.create([
                   area: 'Velachery'
                 },
                 { name: 'Raji',
-                  phone_number: '+919003240109',
+                  phone_number: '+919840692259',
                   blood_group: 'O+',
                   latitude: '13.460422',
                   longitude: '80.649583',
-                  area: 'Nandanam'
+                  area: 'Nandanam',
+                  registration_id: 'APA91bG9mNBxxVenXQoarY0ZZ5Agxvu2TEP9TphIkfdic9UGveU399DyY4xABh8KrsRZav6O5RMoICXSY1vDPJQSZBl-3a99c5OJuLg4tagvmC_oNW3YiWytvnMatHHSl_olNXh9BPhOftPbsTvrO5SXyz46-3w_PQ'
                 },
                 { name: 'Aruna',
                   phone_number: '+919940257943',
