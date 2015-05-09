@@ -9,6 +9,9 @@ class RequestResponseMappingsController < ApplicationController
 
   def my_requests
     user = User.find(params[:user_id])
+    if (months(Date.today, user.last_donated) <= 3)
+      render json: []
+    end
     all_active_requests = BloodRequest.where({active: true})
     all_other_active_requests = all_active_requests.select { |req| req.user_id != user.id }
     my_requests = []
@@ -40,5 +43,9 @@ class RequestResponseMappingsController < ApplicationController
     else
       return d;
     end
+  end
+
+  def months(date1, date2)
+    (date1.year*12+date1.month) - (date2.year*12+date2.month)
   end
 end
