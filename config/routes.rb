@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :users do
     get 'responses' => 'request_response_mappings#my_responses'
+    get 'requests' => 'request_response_mappings#my_requests'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
