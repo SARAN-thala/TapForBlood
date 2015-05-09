@@ -9,12 +9,12 @@ class RequestResponseMappingsController < ApplicationController
 
   def my_requests
     user = User.find(params[:user_id])
-    if (months(Date.today, user.last_donated) <= 3)
-      render json: []
+    my_requests = []
+    if (user.last_donated && months(Date.today, user.last_donated) <= 3)
+      return render json: my_requests
     end
     all_active_requests = BloodRequest.where({active: true})
     all_other_active_requests = all_active_requests.select { |req| req.user_id != user.id }
-    my_requests = []
     all_other_active_requests.each { |req|
       requested_user = User.find(req.user_id)
       distance = distance(user.latitude.to_f, user.longitude.to_f,
