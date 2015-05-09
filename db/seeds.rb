@@ -38,5 +38,13 @@ BloodRequest.create([
                             longitude: '80.249583',
                             area: 'Velachery',
                             active: true
+                        },
+                        {
+                            user_id: 1,
+                            blood_group: 'A+',
+                            latitude: '13.060422',
+                            longitude: '80.249583',
+                            area: 'Velachery',
+                            active: false
                         }
                     ])
