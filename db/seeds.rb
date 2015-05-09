@@ -12,13 +12,14 @@ User.create([
                   blood_group: 'AB+',
                   latitude: '13.060422',
                   longitude: '80.249583',
-                  area: 'Velachery'
+                  area: 'Velachery',
+                  registration_id: 'APA91bG9mNBxxVenXQoarY0ZZ5Agxvu2TEP9TphIkfdic9UGveU399DyY4xABh8KrsRZav6O5RMoICXSY1vDPJQSZBl-3a99c5OJuLg4tagvmC_oNW3YiWytvnMatHHSl_olNXh9BPhOftPbsTvrO5SXyz46-3w_PQ'
                 },
                 { name: 'Raji',
                   phone_number: '+919840692259',
                   blood_group: 'O+',
-                  latitude: '13.460422',
-                  longitude: '80.649583',
+                  latitude: '12.9698814',
+                  longitude: '80.2442356',
                   area: 'Nandanam',
                   registration_id: 'APA91bG9mNBxxVenXQoarY0ZZ5Agxvu2TEP9TphIkfdic9UGveU399DyY4xABh8KrsRZav6O5RMoICXSY1vDPJQSZBl-3a99c5OJuLg4tagvmC_oNW3YiWytvnMatHHSl_olNXh9BPhOftPbsTvrO5SXyz46-3w_PQ'
                 },
@@ -27,14 +28,16 @@ User.create([
                   blood_group: 'A+',
                   latitude: '13.760422',
                   longitude: '80.949583',
-                  area: 'Tambaram'
+                  area: 'Tambaram',
+                  registration_id: 'APA91bG9mNBxxVenXQoarY0ZZ5Agxvu2TEP9TphIkfdic9UGveU399DyY4xABh8KrsRZav6O5RMoICXSY1vDPJQSZBl-3a99c5OJuLg4tagvmC_oNW3YiWytvnMatHHSl_olNXh9BPhOftPbsTvrO5SXyz46-3w_PQ'
                 },
                 { name: 'ShahrukhKhan',
                   phone_number: '+919965434554',
                   blood_group: 'O+',
                   latitude: '13.760422',
                   longitude: '80.949583',
-                  area: 'Tambaram'
+                  area: 'Tambaram',
+                  registration_id: 'APA91bG9mNBxxVenXQoarY0ZZ5Agxvu2TEP9TphIkfdic9UGveU399DyY4xABh8KrsRZav6O5RMoICXSY1vDPJQSZBl-3a99c5OJuLg4tagvmC_oNW3YiWytvnMatHHSl_olNXh9BPhOftPbsTvrO5SXyz46-3w_PQ'
                 }
             ])
 
