@@ -3,8 +3,12 @@ class BloodRequestsController < ApplicationController
   def index
     user_id = params[:user_id]
     all_requests = BloodRequest.all
-    requests_generated_by_other_users = all_requests.select{|req| req.user_id != user_id.to_i && req.active == true}
-    render json: requests_generated_by_other_users
+    final_requests = []
+    requests_generated_by_other_users = all_requests.select { |req| req.user_id != user_id.to_i && req.active == true }
+    requests_generated_by_other_users.each { |req|
+      final_requests.push({request: req, user: User.find(req.user_id)})
+    }
+    render json: final_requests
   end
 
   def create
