@@ -23,7 +23,14 @@ User.create([
                 },
                 { name: 'Aruna',
                   phone_number: '+919940257943',
-                  blood_group: 'B-',
+                  blood_group: 'A+',
+                  latitude: '13.760422',
+                  longitude: '80.949583',
+                  area: 'Tambaram'
+                },
+                { name: 'ShahrukhKhan',
+                  phone_number: '+919965434554',
+                  blood_group: 'O+',
                   latitude: '13.760422',
                   longitude: '80.949583',
                   area: 'Tambaram'
@@ -48,3 +55,14 @@ BloodRequest.create([
                             active: false
                         }
                     ])
+
+RequestResponseMapping.create([
+                                  {
+                                      blood_request_id: 1,
+                                      user_id: 2
+                                  },
+                                  {
+                                      blood_request_id: 1,
+                                      user_id: 3
+                                  }
+                              ])

@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   resources :users
   resources :blood_requests
 
+  resources :users do
+    get 'responses' => 'request_response_mappings#my_responses'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

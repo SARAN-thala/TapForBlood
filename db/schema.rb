@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150509051238) do
+ActiveRecord::Schema.define(version: 20150509065318) do
 
   create_table "blood_requests", force: :cascade do |t|
     t.string   "blood_group"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20150509051238) do
   end
 
   add_index "blood_requests", ["user_id"], name: "index_blood_requests_on_user_id"
+
+  create_table "request_response_mappings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "blood_request_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "request_response_mappings", ["blood_request_id"], name: "index_request_response_mappings_on_blood_request_id"
+  add_index "request_response_mappings", ["user_id"], name: "index_request_response_mappings_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
