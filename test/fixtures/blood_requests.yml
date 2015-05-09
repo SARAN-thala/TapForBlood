@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  blood_group: MyString
+  string: MyString
+  latitude: MyString
+  string: MyString
+  longitude: MyString
+  string: MyString
+  area: MyString
+  string: MyString
+  user_id: 
+
+two:
+  blood_group: MyString
+  string: MyString
+  latitude: MyString
+  string: MyString
+  longitude: MyString
+  string: MyString
+  area: MyString
+  string: MyString
+  user_id: 
