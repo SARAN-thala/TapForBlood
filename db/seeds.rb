@@ -16,7 +16,7 @@ User.create([
                 },
                 { name: 'Raji',
                   phone_number: '+919003240109',
-                  blood_group: 'A+',
+                  blood_group: 'O+',
                   latitude: '13.460422',
                   longitude: '80.649583',
                   area: 'Nandanam'
