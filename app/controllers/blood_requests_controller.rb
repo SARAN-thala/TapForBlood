@@ -77,7 +77,7 @@ class BloodRequestsController < ApplicationController
     Parse.init :application_id => "VwigJVwni2KiQ0Mq3GvnmZdVC3m72F2AL4Z0vRQI",
                             :api_key => "f1u42HkY3rzmMSVsWsL0PLynFw48zBJr84wKmkeI",
                             :quiet => false
-    push = Parse::Push.new({ "alert"=> "I'm sending this push to all my app users!" })
+    push = Parse::Push.new({ "alert"=> "Tap to save life" })
     push.where = {}
     push.save
     response
