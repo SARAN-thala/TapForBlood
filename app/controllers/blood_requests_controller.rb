@@ -92,7 +92,7 @@ class BloodRequestsController < ApplicationController
     user = User.find(blood_request.user_id)
     phone_numbers.each { |number|
       @client.account.messages.create({:body => "Blood Needed to save life. Contact #{user.name} - #{user.phone_number}",
-                                                :to => "+919003240109",:from => "+19149203684"})
+                                                :to => number,:from => "+19149203684"})
     }
   end
 end
