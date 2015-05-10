@@ -18,9 +18,10 @@ class BloodRequestsController < ApplicationController
     @blood_request = BloodRequest.new(blood_request_params)
     @blood_request.update_attributes!(active: true)
     @blood_request.save
-    gcm_response = gcm_notification @blood_request
+    # gcm_response = gcm_notification @blood_request
+    parse_notification @blood_request
     sms_notification @blood_request
-    render json: {status: 'OK', blood_request_id: @blood_request.id, gcm_response: gcm_response}
+    render json: {status: 'OK', blood_request_id: @blood_request.id}
   end
 
   def destroy
@@ -71,15 +72,27 @@ class BloodRequestsController < ApplicationController
     response
     end
 
+  def parse_notification(blood_request)
+    # registration_ids= get_neighbouring_device_ids blood_request
+    Parse.init :application_id => "VwigJVwni2KiQ0Mq3GvnmZdVC3m72F2AL4Z0vRQI",
+                            :api_key => "f1u42HkY3rzmMSVsWsL0PLynFw48zBJr84wKmkeI",
+                            :quiet => false
+    push = Parse::Push.new({ "alert"=> "I'm sending this push to all my app users!" })
+    push.where = {}
+    push.save
+    response
+    end
+
   def sms_notification(blood_request)
     phone_numbers= get_neighbouring_phone_numbers blood_request
-    account_sid = 'ACe8903d205b720269cfdeeea07101c11e'
-    auth_token = '101e5eeb5b0add39110bc1130d7c2323'
+    account_sid = 'ACf989f9e9cc83c85befc6453a48014195'
+    auth_token = '2821ea20eb96977a9ab433024934c068'
     @client = Twilio::REST::Client.new account_sid, auth_token
 
+    user = User.find(blood_request.user_id)
     phone_numbers.each { |number|
-      @client.account.messages.create(:body => "1120-3608 Test Mess.. Please work please",
-                                                :to => number,:from => "+15005550006")
+      @client.account.messages.create({:body => "Blood Needed to save life. Contact #{user.name} - #{user.phone_number}",
+                                                :to => "+919003240109",:from => "+19149203684"})
     }
   end
 end
