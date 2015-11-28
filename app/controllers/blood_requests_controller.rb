@@ -85,14 +85,14 @@ class BloodRequestsController < ApplicationController
 
   def sms_notification(blood_request)
     phone_numbers= get_neighbouring_phone_numbers blood_request
-    account_sid = 'ACf989f9e9cc83c85befc6453a48014195'
-    auth_token = '2821ea20eb96977a9ab433024934c068'
+    account_sid = 'AC8f8d1495fbdc69097f32ef0d6dd9e5b2'
+    auth_token = 'd90a6bf5fc577a607db3611c414cd921'
     @client = Twilio::REST::Client.new account_sid, auth_token
 
     user = User.find(blood_request.user_id)
     phone_numbers.uniq.each { |number|
-      @client.account.messages.create({:body => "Blood Needed to save life. Contact #{user.name} - #{user.phone_number}",
-                                                :to => number,:from => "+19149203684"})
+      @client.account.messages.create({:body => "Blood needed to save life. Contact #{user.name} - #{user.phone_number}",
+                                                :to => number,:from => "+12243741705"})
     }
   end
 end
