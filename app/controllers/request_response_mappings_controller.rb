@@ -10,11 +10,11 @@ class RequestResponseMappingsController < ApplicationController
 
   def my_responses
     active_request = BloodRequest.where(user_id: params[:user_id], active: true).first
-    filtered_request_responses = RequestResponseMapping.where(blood_request_id: active_request.id)
+    filtered_request_responses = RequestResponseMapping.where(blood_request_id: params[:blood_request_id])
     responded_users = filtered_request_responses.collect { |mapping|
       User.find(mapping.user_id)
     }
-    render json: {active_request: active_request, responses: responded_users}
+    render json: {active_request: BloodRequest.find_by_id(params[:blood_request_id]), responses: responded_users}
   end
 
   def my_requests

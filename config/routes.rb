@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :users do
     get 'responses' => 'request_response_mappings#my_responses'
-    get 'requests' => 'request_response_mappings#my_requests'
+    get 'requests/:blood_request_id' => 'request_response_mappings#my_requests'
     post '/requests/:request_id/create', to: 'request_response_mappings#create'
   end
 
