@@ -8,9 +8,9 @@ class BloodRequestsController < ApplicationController
     all_requests = BloodRequest.all
     final_requests = []
     requests_generated_by_other_users = all_requests.select { |req| req.user_id != user_id.to_i && req.active == true }
-    requests_generated_by_other_users.each { |req|
-      final_requests.push({request: req, user: User.find(req.user_id)})
-    }
+    requests_generated_by_other_users.each do |req|
+      final_requests.push(request: req, user: User.find(req.user_id))
+    end
     render json: final_requests
   end
 
@@ -21,78 +21,75 @@ class BloodRequestsController < ApplicationController
     # gcm_response = gcm_notification @blood_request
     parse_notification @blood_request
     sms_notification @blood_request
-    render json: {status: 'OK', blood_request_id: @blood_request.id}
+    render json: { status: 'OK', blood_request_id: @blood_request.id }
   end
 
   def destroy
     blood_request = BloodRequest.find(params[:id])
     blood_request.update_attributes!(active: false)
     blood_request.save
-    render json: {status: 'OK'}
+    render json: { status: 'OK' }
   end
 
   private
+
   def blood_request_params
     params.require(:blood_request).permit(:user_id, :blood_group, :area, :latitude, :longitude)
   end
 
   def get_neighbouring_device_ids(blood_request)
-    registration_ids =[]
+    registration_ids = []
     users = User.all
-    users = users.select{|user| user.id != blood_request.user_id}
-    users.each { |user|
+    users = users.reject { |user| user.id == blood_request.user_id }
+    users.each do |user|
       distance = distance(user.latitude.to_f, user.longitude.to_f,
                           blood_request.latitude.to_f, blood_request.longitude.to_f)
-      if distance < 100
-        registration_ids.push(user.registration_id)
-      end
-    }
+      registration_ids.push(user.registration_id) if distance < 100
+    end
     registration_ids
   end
 
   def get_neighbouring_phone_numbers(blood_request)
-    phone_numbers =[]
+    phone_numbers = []
     users = User.all
-    users = users.select{|user| user.id != blood_request.user_id}
-    users.each { |user|
+    users = users.reject { |user| user.id == blood_request.user_id }
+    users.each do |user|
       distance = distance(user.latitude.to_f, user.longitude.to_f,
                           blood_request.latitude.to_f, blood_request.longitude.to_f)
-      if distance < 100
-        phone_numbers.push(user.phone_number)
-      end
-    }
+      phone_numbers.push(user.phone_number) if distance < 100
+    end
     phone_numbers
   end
 
   def gcm_notification(blood_request)
-    gcm = GCM.new("AIzaSyBFhjziCke8y5YXqFxzYhVQUpSOtnUT_eo")
-    registration_ids= get_neighbouring_device_ids blood_request
-    options = {data: blood_request}
+    gcm = GCM.new('AIzaSyBFhjziCke8y5YXqFxzYhVQUpSOtnUT_eo')
+    registration_ids = get_neighbouring_device_ids blood_request
+    options = { data: blood_request }
     response = gcm.send(registration_ids, options)
     response
     end
 
-  def parse_notification(blood_request)
+  def parse_notification(_blood_request)
     # registration_ids= get_neighbouring_device_ids blood_request
-    Parse.init :application_id => "VwigJVwni2KiQ0Mq3GvnmZdVC3m72F2AL4Z0vRQI",
-                            :api_key => "f1u42HkY3rzmMSVsWsL0PLynFw48zBJr84wKmkeI",
-                            :quiet => false
-    push = Parse::Push.new({ "alert"=> "Tap to save life" })
+    Parse.init application_id: 'VwigJVwni2KiQ0Mq3GvnmZdVC3m72F2AL4Z0vRQI',
+               api_key: 'f1u42HkY3rzmMSVsWsL0PLynFw48zBJr84wKmkeI',
+               quiet: false
+    push = Parse::Push.new('alert' => 'Tap to save life')
     push.where = {}
     push.save
     response
     end
 
   def sms_notification(blood_request)
-    phone_numbers= get_neighbouring_phone_numbers blood_request
+    phone_numbers = get_neighbouring_phone_numbers blood_request
     account_sid = 'AC8f8d1495fbdc69097f32ef0d6dd9e5b2'
     auth_token = 'd90a6bf5fc577a607db3611c414cd921'
     @client = Twilio::REST::Client.new account_sid, auth_token
 
     user = User.find(blood_request.user_id)
-    phone_numbers.uniq.each { |number|
-      @client.account.messages.create({:body => "Blood needed to save life. Contact #{user.name} - #{user.phone_number}",
-                                                :to => number,:from => "+12243741705"})
-    }
+    phone_numbers.uniq.each do |number|
+      @client.account.messages.create(body: "Blood needed to save life. Contact #{user.name} - #{user.phone_number}",
+                                      to: number, from: '+12243741705')
+    end
   end
 end
