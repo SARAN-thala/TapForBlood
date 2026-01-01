@@ -33,7 +33,7 @@ gem 'parse-ruby-client'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'gcm'
+gem 'gcm', '>= 0.1.1'
 
 gem 'twilio-ruby'
 group :development, :test do
